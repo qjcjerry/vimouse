@@ -129,6 +129,12 @@ return function(tmod, tkey)
         mul = 1
       end
 
+      if flags.ctrl then
+        mul_ctrl = 1
+      else
+        mul_ctrl = 0
+      end
+
       if is_tapkey or code == keycodes['escape'] then
         if dragging then
           postEvent(eventTypes.leftMouseUp, coords, flags, 0)
@@ -172,12 +178,16 @@ return function(tmod, tkey)
         end
       elseif code == keycodes['h'] then
         x_delta = step * mul * -1
+        y_delta = step * mul * mul_ctrl * -1
       elseif code == keycodes['l'] then
         x_delta = step * mul
+        y_delta = step * mul * mul_ctrl
       elseif code == keycodes['j'] then
         y_delta = step * mul
+        x_delta = step * mul * mul_ctrl * -1
       elseif code == keycodes['k'] then
         y_delta = step * mul * -1
+        x_delta = step * mul * mul_ctrl
       elseif code == keycodes['p'] then
         coords = center
       end
